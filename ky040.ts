@@ -60,6 +60,10 @@ namespace RotaryEncoder {
         enc.dtPin = dt;
         enc.swPin = sw;
 
+        pins.setPull(clk, PinPullMode.PullUp);
+        pins.setPull(dt, PinPullMode.PullUp);
+        pins.setPull(sw, PinPullMode.PullUp);
+
         control.inBackground(() => {
             while (true) {
                 const riValue = pins.digitalReadPin(enc.clkPin);

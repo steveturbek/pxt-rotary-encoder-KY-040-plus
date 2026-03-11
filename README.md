@@ -20,6 +20,18 @@ Forked from [Tinkertanker/pxt-rotary-encoder-ky040](https://github.com/tinkertan
 Connect each encoder's CLK, DT, and SW pins to available digital pins on the micro:bit. GND to GND.
 Rotary Encoders are simple switches, can work on 3.3v.
 
+### Recommended pin assignments (micro:bit v2)
+
+| Encoder | CLK | DT  | SW  |
+| ------- | --- | --- | --- |
+| E1      | P0  | P1  | P2  |
+| E2      | P8  | P9  | P16 |
+| E3      | P13 | P14 | P15 |
+
+Avoid P3, P4, P6, P7, P10 — these are shared with the LED matrix and will conflict unless you call `led.enable(false)` first. Avoid P12 (reserved for accessibility).
+
+**micro:bit v1 note:** P9 is LED row 3 on v1. If using a v1 board, replace P9 with P16 and find an alternative SW pin. All other pins in the table above are safe on both versions.
+
 ## Blocks
 
 ### Connect rotary encoder
