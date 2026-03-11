@@ -106,7 +106,7 @@ namespace RotaryEncoder {
   //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
   //% weight=80
   export function initE2(): void {
-    setup(EncoderID.E2, DigitalPin.P8, DigitalPin.P9, DigitalPin.P16);
+    setup(EncoderID.E2, DigitalPin.P8, DigitalPin.P9, DigitalPin.P13);
   }
 
   /**
@@ -117,7 +117,7 @@ namespace RotaryEncoder {
   //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
   //% weight=70
   export function initE3(): void {
-    setup(EncoderID.E3, DigitalPin.P13, DigitalPin.P14, DigitalPin.P15);
+    setup(EncoderID.E3, DigitalPin.P14, DigitalPin.P15, DigitalPin.P16);
   }
 
   /**
