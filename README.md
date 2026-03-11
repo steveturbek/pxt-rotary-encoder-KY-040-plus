@@ -39,7 +39,9 @@ Avoid P3, P4, P6, P7, P10 — these are shared with the LED matrix and will conf
 Must be called before any other blocks. Repeat for each encoder you use.
 
 ```sig
-RotaryEncoder.init(EncoderID.E1, DigitalPin.P0, DigitalPin.P1, DigitalPin.P2)
+RotaryEncoder.initE1()
+RotaryEncoder.initE2()
+RotaryEncoder.initE3()
 ```
 
 ### On event (rotate or button press)
@@ -53,7 +55,7 @@ RotaryEncoder.onEvent(EncoderID.E1, EncoderEvent.ButtonPress, () => {})
 ## Example: Single encoder number input
 
 ```blocks
-RotaryEncoder.init(EncoderID.E1, DigitalPin.P0, DigitalPin.P1, DigitalPin.P2)
+RotaryEncoder.initE1()
 let item = 0
 basic.showNumber(item)
 RotaryEncoder.onEvent(EncoderID.E1, EncoderEvent.CounterClockwise, () => {
@@ -72,8 +74,8 @@ RotaryEncoder.onEvent(EncoderID.E1, EncoderEvent.ButtonPress, () => {
 ## Example: Two encoders
 
 ```blocks
-RotaryEncoder.init(EncoderID.E1, DigitalPin.P0, DigitalPin.P1, DigitalPin.P2)
-RotaryEncoder.init(EncoderID.E2, DigitalPin.P8, DigitalPin.P9, DigitalPin.P16)
+RotaryEncoder.initE1()
+RotaryEncoder.initE2()
 let val1 = 0
 let val2 = 0
 RotaryEncoder.onEvent(EncoderID.E1, EncoderEvent.Clockwise, () => { val1++ })
@@ -121,11 +123,9 @@ RotaryEncoder.onEvent(EncoderID.E3, EncoderEvent.ButtonPress, function () {
     basic.showNumber(3)
     basic.showArrow(ArrowNames.South)
 })
-basic.pause(1000)
-basic.showIcon(IconNames.Chessboard)
-RotaryEncoder.init(EncoderID.E1, DigitalPin.P0, DigitalPin.P1, DigitalPin.P2)
-RotaryEncoder.init(EncoderID.E2, DigitalPin.P8, DigitalPin.P9, DigitalPin.P16)
-RotaryEncoder.init(EncoderID.E3, DigitalPin.P13, DigitalPin.P14, DigitalPin.P15)
+RotaryEncoder.initE1()
+RotaryEncoder.initE2()
+RotaryEncoder.initE3()
 
 ```
 

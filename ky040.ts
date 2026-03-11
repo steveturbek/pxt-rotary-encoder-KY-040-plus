@@ -16,14 +16,15 @@ enum EncoderID {
     E3 = 3
 }
 
+
 //% color=50 weight=80
 //% icon="\uf01e"
 namespace RotaryEncoder {
 
     class EncoderState {
-        clkPin: DigitalPin;
-        dtPin: DigitalPin;
-        swPin: DigitalPin;
+        clkPin: number;
+        dtPin: number;
+        swPin: number;
         lastPressed: number;
         rotateReady: boolean;
         pressedID: number;
@@ -48,26 +49,20 @@ namespace RotaryEncoder {
         return encoders[idx];
     }
 
-    /**
-     * Initialises the rotary encoder and starts polling its pins.
-     */
-    //% blockId=rotary_ky_init
-    //% block="connect %id clk %clk|dt %dt|sw %sw"
-    //% icon="\uf1ec"
-    export function init(id: EncoderID, clk: DigitalPin, dt: DigitalPin, sw: DigitalPin): void {
+    function setup(id: EncoderID, clk: number, dt: number, sw: number): void {
         const enc = getEncoder(id);
         enc.clkPin = clk;
         enc.dtPin = dt;
         enc.swPin = sw;
 
-        pins.setPull(clk, PinPullMode.PullUp);
-        pins.setPull(dt, PinPullMode.PullUp);
-        pins.setPull(sw, PinPullMode.PullUp);
+        pins.setPull(clk as DigitalPin, PinPullMode.PullUp);
+        pins.setPull(dt as DigitalPin, PinPullMode.PullUp);
+        pins.setPull(sw as DigitalPin, PinPullMode.PullUp);
 
         control.inBackground(() => {
             while (true) {
-                const riValue = pins.digitalReadPin(enc.clkPin);
-                const dvValue = pins.digitalReadPin(enc.dtPin);
+                const riValue = pins.digitalReadPin(enc.clkPin as DigitalPin);
+                const dvValue = pins.digitalReadPin(enc.dtPin as DigitalPin);
                 if (riValue == 1 && dvValue == 1) enc.rotateReady = true;
                 else if (enc.rotateReady) {
                     if (riValue == 1 && dvValue == 0) {
@@ -84,7 +79,7 @@ namespace RotaryEncoder {
 
         control.inBackground(() => {
             while (true) {
-                const pressed = pins.digitalReadPin(enc.swPin);
+                const pressed = pins.digitalReadPin(enc.swPin as DigitalPin);
                 if (pressed != enc.lastPressed) {
                     enc.lastPressed = pressed;
                     if (pressed == 0) control.raiseEvent(enc.pressedID, 0);
@@ -95,10 +90,54 @@ namespace RotaryEncoder {
     }
 
     /**
+     * Connect RotaryEncoder 1: CLK=P0, DT=P1, SW=P2
+     */
+    //% blockId=rotary_ky_init1
+    //% block="connect RotaryEncoder 1  CLK=P0 DT=P1 SW=P2"
+    //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
+    export function initE1(): void {
+        setup(EncoderID.E1, DigitalPin.P0, DigitalPin.P1, DigitalPin.P2);
+    }
+
+    /**
+     * Connect RotaryEncoder 2: CLK=P8, DT=P9, SW=P16
+     */
+    //% blockId=rotary_ky_init2
+    //% block="connect RotaryEncoder 2  CLK=P8 DT=P9 SW=P16"
+    //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
+    export function initE2(): void {
+        setup(EncoderID.E2, DigitalPin.P8, DigitalPin.P9, DigitalPin.P16);
+    }
+
+    /**
+     * Connect RotaryEncoder 3: CLK=P13, DT=P14, SW=P15
+     */
+    //% blockId=rotary_ky_init3
+    //% block="connect RotaryEncoder 3  CLK=P13 DT=P14 SW=P15"
+    //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
+    export function initE3(): void {
+        setup(EncoderID.E3, DigitalPin.P13, DigitalPin.P14, DigitalPin.P15);
+    }
+
+    /**
+     * Connect a rotary encoder using any digital pin.
+     * Avoid LED pins P3 P4 P6 P7 P10 and accessibility pin P12.
+     * See https://github.com/steveturbek/pxt-rotary-encoder-KY-040-multi#recommended-pin-assignments-microbit-v2
+     */
+    //% blockId=rotary_ky_init_advanced
+    //% block="connect %id clk %clk|dt %dt|sw %sw (any pin)"
+    //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
+    //% advanced=true
+    export function initAdvanced(id: EncoderID, clk: DigitalPin, dt: DigitalPin, sw: DigitalPin): void {
+        setup(id, clk, dt, sw);
+    }
+
+    /**
      * Run code when the rotary encoder rotates or the button is pressed.
      */
     //% blockId=rotary_ky_event
     //% block="on %id %event"
+    //% help=github:steveturbek/pxt-rotary-encoder-KY-040-multi
     export function onEvent(id: EncoderID, event: EncoderEvent, body: () => void): void {
         const enc = getEncoder(id);
         if (event == EncoderEvent.Clockwise) control.onEvent(enc.rotatedClockwiseID, EncoderEvent.Clockwise, body);
