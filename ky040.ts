@@ -9,9 +9,7 @@ enum EncoderID {
     //% block="encoder 2"
     E2 = 2,
     //% block="encoder 3"
-    E3 = 3,
-    //% block="encoder 4"
-    E4 = 4
+    E3 = 3
 }
 
 //% color=50 weight=80

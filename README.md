@@ -1,17 +1,20 @@
-# KY040 Rotary Encoder MakeCode Package
+# KY-040 Rotary Encoder MakeCode Package
 
-This is the MakeCode package for the KY-040 rotary encoder, supporting up to 4 encoders simultaneously.
+This is the MakeCode package for the KY-040 rotary encoder, supporting up to 3 encoders simultaneously.
 
 Forked from [Tinkertanker/pxt-rotary-encoder-ky040](https://github.com/tinkertanker/pxt-rotary-encoder-ky040) with the following changes:
-- Supports 1–4 encoders at the same time
+
+- Supports 1–3 encoders at the same time
 - Removed noisy serial debug messages that interfered with student code
 
 ## Hardware Setup
+
 Connect each encoder's CLK, DT, and SW pins to available digital pins on the micro:bit. GND to GND.
 
 ## Blocks
 
 ### Connect rotary encoder
+
 Must be called before any other blocks. Repeat for each encoder you use.
 
 ```sig
@@ -65,4 +68,4 @@ RotaryEncoder.onRotateEvent(EncoderID.E2, RotationDirection.Left, () => { val2--
 
 ## Supported targets
 
-* for PXT/microbit
+- for PXT/microbit
