@@ -1,6 +1,6 @@
 {
   "name": "multi-rotary-encoder-KY-040",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MakeCode package for KY-040 rotary encoder, supporting up to 3 encoders simultaneously",
   "license": "MIT",
   "dependencies": {
