@@ -11,7 +11,8 @@ Forked from [Tinkertanker/pxt-rotary-encoder-ky040](https://github.com/tinkertan
 
 - test!
 - add debouncing
-- ~~change right/left to counterclockwise/clockwise~~ done
+- ~~change right/left to clockwise/counterclockwise~~ done
+- ~~combine rotate and button press into one block~~ done
 - submit to makecode
 
 ## Hardware Setup
