@@ -1,7 +1,7 @@
 {
   "name": "ky040-rotary-encoder-plus",
-  "version": "0.7.0",
-  "description": "KY-040 rotary encoder extension for micro:bit. Up to 3 encoders, debounced, active-high switch support.",
+  "version": "0.8.0",
+  "description": "Micro:bit Extension for KY-040 rotary encoders",
   "license": "MIT",
   "dependencies": {
     "core": "*"
